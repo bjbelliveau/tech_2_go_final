@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:tech_2_go_final/data/product.dart';
 import 'package:tech_2_go_final/utilities/widget_utils.dart';
@@ -15,8 +16,6 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
-    final imageSize = Size(250.0, 250.0);
-
     return Scaffold(
       backgroundColor: Color.fromRGBO(1, 137, 185, 0.85),
       appBar: AppBar(
@@ -40,7 +39,7 @@ class _DetailPageState extends State<DetailPage> {
           children: <Widget>[
             Column(
               children: <Widget>[
-                _getImageSlider(),
+                _getImageSlider(widget.product.type),
                 _getCrossRef(),
               ],
             ),
@@ -52,7 +51,7 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  _getImageSlider() {
+  _getImageSlider(String type) {
     String urlPrefix = 'assets/images/product_images/';
     List<String> images = [
       urlPrefix + widget.heroTag + '.jpg',
@@ -61,7 +60,44 @@ class _DetailPageState extends State<DetailPage> {
       urlPrefix + widget.heroTag + '_4.jpg',
     ];
 
-    return Hero(
+    return type.toLowerCase() == 'fuser'
+        ? CarouselSlider(
+            items: images.map((image) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 15.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15.0),
+                  child: Hero(
+                    tag: widget.heroTag,
+                    child: Image.asset(
+                      image,
+                      fit: BoxFit.cover,
+                      width: 1000.0,
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+            viewportFraction: 0.9,
+            aspectRatio: 16 / 9,
+            initialPage: 0,
+          )
+        : Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15.0),
+              child: Hero(
+                tag: widget.heroTag,
+                child: Image.asset(
+                  images[0],
+                  fit: BoxFit.cover,
+                  width: 1000.0,
+                ),
+              ),
+            ),
+          );
+
+    /*return Hero(
       tag: widget.heroTag,
       child: Padding(
         padding: EdgeInsets.all(15.0),
@@ -73,7 +109,7 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ),
       ),
-    );
+    );*/
   }
 
   _getCrossRef() {

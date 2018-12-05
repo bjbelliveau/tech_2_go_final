@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -24,7 +23,6 @@ class _ListPageState extends State<ListPage> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height / 4;
-    double width = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: NestedScrollView(
@@ -101,7 +99,6 @@ class ProductsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(allProducts.length);
     List<Product> currentProducts = _getCurrentProduct(title);
     String productType = currentProducts[0].type.toLowerCase();
 
@@ -294,28 +291,7 @@ class ProductsList extends StatelessWidget {
     var bytes = await consolidateHttpClientResponseBytes(response);
     String dir = (await getApplicationDocumentsDirectory()).path;
     File file = File('$dir/$filename');
-    await file.writeAsBytesSync(bytes);
+    file.writeAsBytesSync(bytes);
     return file;
-  }
-
-  Future<String> downloadPdf(String pdfUrl, String tempPath) async {
-    var dio = Dio();
-    dio.onHttpClientCreate = (HttpClient client) {
-      client.idleTimeout = Duration(seconds: 0);
-    };
-
-    try {
-      Response response =
-          await dio.download(pdfUrl, tempPath, onProgress: (received, total) {
-        String percent = (received / total * 100).toStringAsFixed(0) + "%";
-        print(percent);
-        return percent;
-      });
-      print(response.statusCode);
-    } catch (exception) {
-      print(exception);
-    }
-
-    return null;
   }
 }
