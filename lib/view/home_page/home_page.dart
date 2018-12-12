@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
             highlightColor: Theme.of(context).accentColor,
             onPressed: () async {
               await _launchUrl(null,
-                  'mailto:techsupp@laserpros.com?subject=Tech Support From App');
+                  'mailto:techsupp@laserpros.com?subject=Tech%Support%From%App');
             },
           )),
           Expanded(
@@ -157,9 +157,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   _launchUrl(String deepLink, String urlString) async {
+    print("DeepLink: $deepLink, UrlString: $urlString");
+
     if (deepLink != null && await canLaunch(deepLink)) {
+      print("Opened: $deepLink");
       await launch(deepLink);
     } else {
+      print("Opened: $urlString");
       await launch(urlString);
     }
   }
