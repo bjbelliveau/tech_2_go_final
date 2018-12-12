@@ -160,10 +160,10 @@ class _HomePageState extends State<HomePage> {
     print("DeepLink: $deepLink, UrlString: $urlString");
 
     if (deepLink != null && await canLaunch(deepLink)) {
-      print("Opened: $deepLink");
+
       await launch(deepLink);
     } else {
-      print("Opened: $urlString");
+
       await launch(urlString);
     }
   }
