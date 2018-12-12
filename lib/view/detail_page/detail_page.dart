@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:tech_2_go_final/data/product.dart';
 import 'package:tech_2_go_final/utilities/widget_utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatefulWidget {
   final String heroTag;
@@ -64,16 +65,14 @@ class _DetailPageState extends State<DetailPage> {
         ? CarouselSlider(
             items: images.map((image) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 15.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 5.0, vertical: 15.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15.0),
-                  child: Hero(
-                    tag: widget.heroTag,
-                    child: Image.asset(
-                      image,
-                      fit: BoxFit.cover,
-                      width: 1000.0,
-                    ),
+                  child: Image.asset(
+                    image,
+                    fit: BoxFit.cover,
+                    width: 1000.0,
                   ),
                 ),
               );
@@ -83,33 +82,17 @@ class _DetailPageState extends State<DetailPage> {
             initialPage: 0,
           )
         : Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
-              child: Hero(
-                tag: widget.heroTag,
-                child: Image.asset(
-                  images[0],
-                  fit: BoxFit.cover,
-                  width: 1000.0,
-                ),
+              child: Image.asset(
+                images[0],
+                fit: BoxFit.cover,
+                width: 1000.0,
               ),
             ),
           );
-
-    /*return Hero(
-      tag: widget.heroTag,
-      child: Padding(
-        padding: EdgeInsets.all(15.0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(15.0),
-          child: Image.asset(
-            images[0],
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-    );*/
   }
 
   _getCrossRef() {
@@ -161,7 +144,9 @@ class _DetailPageState extends State<DetailPage> {
       padding: EdgeInsets.all(screenAwareSize(25.0, context)),
       child: RaisedButton(
         padding: EdgeInsets.all(screenAwareSize(15.0, context)),
-        onPressed: () {},
+        onPressed: () async {
+          await _launchUrl(widget.product.group);
+        },
         color: Theme.of(context).accentColor,
         elevation: 2.0,
         child: Text(
@@ -173,5 +158,23 @@ class _DetailPageState extends State<DetailPage> {
         ),
       ),
     );
+  }
+
+  _launchUrl(String group) async {
+    const url = 'https://www.laserpros.com/products-search?qs=';
+    String urlString = url + group.toLowerCase();
+
+    if (await canLaunch(urlString)) {
+      await launch(urlString);
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Alert'),
+            );
+          });
+      throw 'Could not launch ${url + group}';
+    }
   }
 }

@@ -1,14 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:modal_drawer_handle/modal_drawer_handle.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:snaplist/snaplist.dart';
 import 'package:tech_2_go_final/utilities/widget_utils.dart'
     show screenAwareSize;
 import 'package:tech_2_go_final/view/home_page/nav_card.dart';
 import 'package:tech_2_go_final/view/map_view/map.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -50,120 +47,120 @@ class _HomePageState extends State<HomePage> {
                 tileMode: TileMode.mirror),
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(top: screenAwareSize(25.0, context)),
-                child: Container(
-                  height: cardSize.height,
-                  child: SnapList(
-                    count: navCardList.length,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: (MediaQuery.of(context).size.width -
-                                cardSize.width) /
-                            2),
-                    sizeProvider: (index, data) => cardSize,
-                    separatorProvider: (index, data) =>
-                        Size(screenAwareSize(25.0, context), 0.0),
-                    builder: (context, index, data) {
-                      return NavCard(
-                        title: navCardList[index],
-                      );
-                    },
-                  ),
+              Container(
+                height: cardSize.height,
+                child: SnapList(
+                  count: navCardList.length,
+                  padding: EdgeInsets.symmetric(
+                      horizontal:
+                          (MediaQuery.of(context).size.width - cardSize.width) /
+                              2),
+                  sizeProvider: (index, data) => cardSize,
+                  separatorProvider: (index, data) =>
+                      Size(screenAwareSize(25.0, context), 0.0),
+                  builder: (context, index, data) {
+                    return NavCard(
+                      title: navCardList[index],
+                    );
+                  },
                 ),
               ),
+              _contact(),
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      mainAxisSize: MainAxisSize.max,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ModalDrawerHandle(
-                            handleColor: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        Material(
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.phone,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            title: Text('Phone support'),
-                            onTap: () async {
-                              Directory tempDir =
-                                  await getApplicationDocumentsDirectory();
-                              String path = tempDir.path;
-                              print(path);
-                            },
-                          ),
-                        ),
-                        Material(
-                          child: ListTile(
-                            leading: Icon(Icons.email,
-                                color: Theme.of(context).primaryColor),
-                            title: Text('E-mail support'),
-                            onTap: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (_) => LpiMap()));
-                            },
-                          ),
-                        ),
-                        Material(
-                          child: ListTile(
-                            leading: Icon(MdiIcons.facebook,
-                                color: Theme.of(context).primaryColor),
-                            title: Text('Follow us on Facebook'),
-                            onTap: () {},
-                          ),
-                        ),
-                        Material(
-                          child: ListTile(
-                            leading: Icon(MdiIcons.twitter,
-                                color: Theme.of(context).primaryColor),
-                            title: Text('Follow us on Twitter'),
-                            onTap: () {},
-                          ),
-                        ),
-                        Material(
-                          child: ListTile(
-                            leading: Icon(MdiIcons.linkedin,
-                                color: Theme.of(context).primaryColor),
-                            title: Text('Follow us on LinkedIn'),
-                            onTap: () {},
-                          ),
-                        ),
-                        Material(
-                          child: ListTile(
-                            leading: Icon(Icons.pin_drop,
-                                color: Theme.of(context).primaryColor),
-                            title: Text('Our Locations'),
-                            onTap: () {},
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                });
-          },
-          backgroundColor: Theme.of(context).primaryColor,
-          label: Text('Contact'),
-          icon: Icon(
-            Icons.contact_phone,
-            color: Colors.white,
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
+  }
+
+  _contact() {
+    return Container(
+      height: screenAwareSize(30.0, context),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+              child: IconButton(
+            icon: Icon(
+              Icons.phone,
+              color: Theme.of(context).primaryColor,
+            ),
+            highlightColor: Theme.of(context).accentColor,
+            onPressed: () async {
+              await _launchUrl(null, 'tel:7153601703');
+            },
+          )),
+          Expanded(
+              child: IconButton(
+            icon: Icon(
+              Icons.email,
+              color: Theme.of(context).primaryColor,
+            ),
+            highlightColor: Theme.of(context).accentColor,
+            onPressed: () async {
+              await _launchUrl(null,
+                  'mailto:techsupp@laserpros.com?subject=Tech Support From App');
+            },
+          )),
+          Expanded(
+              child: IconButton(
+            icon: Icon(
+              MdiIcons.facebook,
+              color: Theme.of(context).primaryColor,
+            ),
+            highlightColor: Theme.of(context).accentColor,
+            onPressed: () async {
+              await _launchUrl("fb://profile/104763316256227",
+                  "https://www.facebook.com/laserpros/");
+            },
+          )),
+          Expanded(
+              child: IconButton(
+                  icon: Icon(
+                    MdiIcons.twitter,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  highlightColor: Theme.of(context).accentColor,
+                  onPressed: () async {
+                    await _launchUrl("twitter://user?user_id=61271282",
+                        "https://twitter.com/LaserPros");
+                  })),
+          Expanded(
+              child: IconButton(
+                  icon: Icon(
+                    MdiIcons.linkedin,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  highlightColor: Theme.of(context).accentColor,
+                  onPressed: () async {
+                    await _launchUrl(null, "https://www.linkedin.com");
+                  })),
+          Expanded(
+              child: IconButton(
+            icon: Icon(
+              MdiIcons.mapMarker,
+              color: Theme.of(context).primaryColor,
+            ),
+            highlightColor: Theme.of(context).accentColor,
+            onPressed: () async {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => LpiMap()));
+            },
+          )),
+        ],
+      ),
+    );
+  }
+
+  _launchUrl(String deepLink, String urlString) async {
+    if (deepLink != null && await canLaunch(deepLink)) {
+      await launch(deepLink);
+    } else {
+      await launch(urlString);
+    }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:tech_2_go_final/utilities/widget_utils.dart' show screenAwareSize;
 
 class LpiMap extends StatefulWidget {
   @override
@@ -58,7 +59,7 @@ class _LpiMapState extends State<LpiMap> {
                   );
                 },
                 options: GoogleMapOptions(
-                  minMaxZoomPreference: MinMaxZoomPreference(3.1, 5.0),
+                  minMaxZoomPreference: MinMaxZoomPreference(screenAwareSize(2.5, context), 5.0),
                   cameraPosition:
                       CameraPosition(target: LatLng(39.809734, -92.555620)),
                 ),

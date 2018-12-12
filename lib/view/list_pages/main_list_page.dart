@@ -163,11 +163,8 @@ class ProductsList extends StatelessWidget {
                       /*borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(25.0),
                           bottomRight: Radius.circular(25.0)),*/
-                      child: Hero(
-                        tag: imageString,
-                        child: Image.asset(
-                          'assets/images/product_images/$imageString.jpg',
-                        ),
+                      child: Image.asset(
+                        'assets/images/product_images/$imageString.jpg',
                       ),
                     ),
                   ),
