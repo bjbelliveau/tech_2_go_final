@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tech_2_go_final/data/product.dart';
 import 'package:tech_2_go_final/utilities/widget_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class DetailPage extends StatefulWidget {
   final String heroTag;
@@ -149,12 +150,13 @@ class _DetailPageState extends State<DetailPage> {
         },
         color: Theme.of(context).accentColor,
         elevation: 2.0,
-        child: Text(
+        child: AutoSizeText(
           "Find ${widget.product.group} on the web",
           style: TextStyle(
               color: Colors.white,
               fontSize: screenAwareSize(20.0, context),
               fontWeight: FontWeight.bold),
+          maxLines: 1,
         ),
       ),
     );

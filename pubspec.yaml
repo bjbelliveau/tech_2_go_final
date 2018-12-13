@@ -27,7 +27,8 @@ dependencies:
   google_maps_flutter: ^0.0.3+3
   carousel_slider: ^0.0.7
   flutter_swiper: ^1.1.4
-  url_launcher: ^4.0.2
+  url_launcher: ^4.0.1
+  auto_size_text: ^0.3.0
 
 dev_dependencies:
   flutter_test:

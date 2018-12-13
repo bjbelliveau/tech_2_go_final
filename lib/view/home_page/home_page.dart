@@ -67,100 +67,141 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
-              _contact(),
+//              _contact(),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  _contact() {
-    return Container(
-      height: screenAwareSize(30.0, context),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Expanded(
-              child: IconButton(
-            icon: Icon(
-              Icons.phone,
-              color: Theme.of(context).primaryColor,
-            ),
-            highlightColor: Theme.of(context).accentColor,
-            onPressed: () async {
-              await _launchUrl(null, 'tel:7153601703');
-            },
-          )),
-          Expanded(
-              child: IconButton(
-            icon: Icon(
-              Icons.email,
-              color: Theme.of(context).primaryColor,
-            ),
-            highlightColor: Theme.of(context).accentColor,
-            onPressed: () async {
-              await _launchUrl(null,
-                  'mailto:techsupp@laserpros.com?subject=Tech Support From App');
-            },
-          )),
-          Expanded(
-              child: IconButton(
-            icon: Icon(
-              MdiIcons.facebook,
-              color: Theme.of(context).primaryColor,
-            ),
-            highlightColor: Theme.of(context).accentColor,
-            onPressed: () async {
-              await _launchUrl("fb://profile/104763316256227",
-                  "https://www.facebook.com/laserpros/");
-            },
-          )),
-          Expanded(
-              child: IconButton(
-                  icon: Icon(
-                    MdiIcons.twitter,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  highlightColor: Theme.of(context).accentColor,
-                  onPressed: () async {
-                    await _launchUrl("twitter://user?user_id=61271282",
-                        "https://twitter.com/LaserPros");
-                  })),
-          Expanded(
-              child: IconButton(
-                  icon: Icon(
-                    MdiIcons.linkedin,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  highlightColor: Theme.of(context).accentColor,
-                  onPressed: () async {
-                    await _launchUrl(null, "https://www.linkedin.com");
-                  })),
-          Expanded(
-              child: IconButton(
-            icon: Icon(
-              MdiIcons.mapMarker,
-              color: Theme.of(context).primaryColor,
-            ),
-            highlightColor: Theme.of(context).accentColor,
-            onPressed: () async {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => LpiMap()));
-            },
-          )),
-        ],
+        bottomNavigationBar: _bottomNavBar(),
       ),
     );
   }
 
   _launchUrl(String deepLink, String urlString) async {
     if (deepLink != null && await canLaunch(deepLink)) {
+      print('Launched DeepLink');
       await launch(deepLink);
     } else {
+      print('Launched urlString');
       await launch(urlString);
     }
+  }
+
+  _bottomNavBar() {
+    const iconSize = 25.0;
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+            colors: [
+              Theme.of(context).primaryColor,
+              Color.fromRGBO(1, 137, 185, 0.85),
+              Theme.of(context).primaryColor,
+            ],
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            stops: [0.0, 0.65, 1.0],
+            tileMode: TileMode.mirror),
+      ),
+      height: screenAwareSize(60.0, context),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Expanded(
+            child: GestureDetector(
+                onTap: () async {
+                  await _launchUrl(null, 'tel:7153601703');
+                },
+                child: Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: Icon(
+                    Icons.phone,
+                    color: Colors.white,
+                    size: screenAwareSize(iconSize, context),
+                  ),
+                )),
+          ),
+          Expanded(
+            child: GestureDetector(
+                onTap: () async {
+                  await _launchUrl(null,
+                      'mailto:techsupp@laserpros.com?subject=Tech%Support%From%App');
+                },
+                child: Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: Icon(
+                    Icons.email,
+                    color: Colors.white,
+                    size: screenAwareSize(iconSize, context),
+                  ),
+                )),
+          ),
+          Expanded(
+            child: GestureDetector(
+                onTap: () async {
+                  await _launchUrl('fb://profile/104763316256227',
+                      'https://www.facebook.com/laserpros/');
+                },
+                child: Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: Icon(
+                    MdiIcons.facebook,
+                    color: Colors.white,
+                    size: screenAwareSize(iconSize, context),
+                  ),
+                )),
+          ),
+          Expanded(
+            child: GestureDetector(
+                onTap: () async {
+                  await _launchUrl('twitter://user?user_id=61271282',
+                      'https://twitter.com/LaserPros');
+                },
+                child: Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: Icon(
+                    MdiIcons.twitter,
+                    color: Colors.white,
+                    size: screenAwareSize(iconSize, context),
+                  ),
+                )),
+          ),
+          Expanded(
+            child: GestureDetector(
+                onTap: () async {
+                  await _launchUrl(null, 'https://www.linkedin.com');
+                },
+                child: Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: Icon(
+                    MdiIcons.linkedin,
+                    color: Colors.white,
+                    size: screenAwareSize(iconSize, context),
+                  ),
+                )),
+          ),
+          Expanded(
+            child: GestureDetector(
+                onTap: () async {
+                  await Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => LpiMap()));
+                },
+                child: Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: Icon(
+                    MdiIcons.mapMarker,
+                    color: Colors.white,
+                    size: screenAwareSize(iconSize, context),
+                  ),
+                )),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -9,6 +9,8 @@ import 'package:tech_2_go_final/utilities/loading_dialog.dart';
 import 'package:tech_2_go_final/view/detail_page/detail_page.dart';
 import 'package:tech_2_go_final/view/pdf_view/pdf_page.dart';
 
+import 'package:tech_2_go_final/utilities/widget_utils.dart' show screenAwareSize;
+
 class ListPage extends StatefulWidget {
   final String title;
   final String image;
@@ -29,14 +31,14 @@ class _ListPageState extends State<ListPage> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              actions: <Widget>[
+              /*actions: <Widget>[
                 IconButton(
                   icon: Icon(Icons.search),
                   onPressed: () {
                     print('Search');
                   },
                 ),
-              ],
+              ],*/
               expandedHeight: height,
               floating: false,
               pinned: true,
@@ -125,12 +127,12 @@ class ProductsList extends StatelessWidget {
                           )));
             },
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(screenAwareSize(10.0, context)),
               child: Column(
                 children: <Widget>[
                   Container(
                     color: Theme.of(context).primaryColor,
-                    padding: EdgeInsets.all(15.0),
+                    padding: EdgeInsets.all(screenAwareSize(15.0, context)),
                     child: Material(
                       color: Colors.transparent,
                       child: Column(
@@ -141,7 +143,7 @@ class ProductsList extends StatelessWidget {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'Montsserat',
-                                fontSize: 18.0,
+                                fontSize: screenAwareSize(18.0, context),
                                 fontWeight: FontWeight.w500),
                           ),
                           Text(
@@ -149,7 +151,7 @@ class ProductsList extends StatelessWidget {
                             style: TextStyle(
                                 color: Colors.white70,
                                 fontFamily: 'Montsserat',
-                                fontSize: 15.0),
+                                fontSize: screenAwareSize(15.0, context)),
                           ),
                         ],
                       ),
@@ -212,7 +214,7 @@ class ProductsList extends StatelessWidget {
       itemCount: products.length,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.all(5.0),
+          padding: EdgeInsets.symmetric(horizontal: screenAwareSize(15.0, context), vertical: screenAwareSize(5.0, context)),
           child: products[index].list.length > 1
               ? Card(
                   child: ExpansionTile(
@@ -222,18 +224,18 @@ class ProductsList extends StatelessWidget {
                     ),
                     title: Text(
                       products[index].modelName,
-                      style: TextStyle(fontSize: 20.0),
+                      style: TextStyle(fontSize: screenAwareSize(20.0, context)),
                     ),
                     children: products[index]
                         .list
                         .map<Widget>((pdf) =>
-                            _getTechTipsPdfs(context, pdf, 35.0, tipUrl))
+                            _getTechTipsPdfs(context, pdf, screenAwareSize(35.0, context), tipUrl))
                         .toList(),
                   ),
                 )
               : Card(
                   child: _getTechTipsPdfs(
-                      context, products[index].list[0], 15.0, instUrl),
+                      context, products[index].list[0], screenAwareSize(15.0, context), instUrl),
                 ),
         );
       },
@@ -247,7 +249,7 @@ class ProductsList extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.only(
         left: leftPadding,
-        right: 15.0,
+        right: screenAwareSize(15.0, context),
       ),
       leading: Icon(
         Icons.picture_as_pdf,
@@ -257,7 +259,7 @@ class ProductsList extends StatelessWidget {
         pdfTitle,
         style: TextStyle(
             fontFamily: 'Montsserat',
-            fontSize: 15.0,
+            fontSize: screenAwareSize(15.0, context),
             fontWeight: FontWeight.bold),
       ),
       onTap: () async {
