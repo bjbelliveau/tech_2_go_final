@@ -125,7 +125,7 @@ class _HomePageState extends State<HomePage> {
             child: GestureDetector(
                 onTap: () async {
                   await _launchUrl(null,
-                      'mailto:techsupp@laserpros.com?subject=Tech%Support%From%App');
+                      'mailto:techsupp@laserpros.com?subject=Tech%20Support%20From%App');
                 },
                 child: Container(
                   height: double.infinity,
