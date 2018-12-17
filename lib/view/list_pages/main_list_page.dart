@@ -111,7 +111,7 @@ class ProductsList extends StatelessWidget {
 
   _testListView(List<Product> products) {
     return ListView.builder(
-        itemCount: 20,
+        itemCount: products.length,
         itemBuilder: (context, index) {
           String imageString =
               products[index].group.toLowerCase().replaceAll('-', '_');
@@ -202,6 +202,8 @@ class ProductsList extends StatelessWidget {
 
     newList.sort((a, b) =>
         a.modelName.toLowerCase().compareTo(b.modelName.toLowerCase()));
+
+    print("List Size: ${newList.length}");
 
     return newList;
   }
