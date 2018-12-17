@@ -214,7 +214,7 @@ class ProductsList extends StatelessWidget {
       itemCount: products.length,
       itemBuilder: (context, index) {
         return Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenAwareSize(15.0, context), vertical: screenAwareSize(5.0, context)),
+          padding: EdgeInsets.symmetric(horizontal: screenAwareSize(15.0, context), vertical: screenAwareSize(5.0, context )),
           child: products[index].list.length > 1
               ? Card(
                   child: ExpansionTile(
