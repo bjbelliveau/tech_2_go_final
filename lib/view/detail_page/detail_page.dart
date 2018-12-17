@@ -164,7 +164,7 @@ class _DetailPageState extends State<DetailPage> {
 
   _launchUrl(String group) async {
     const url = 'https://www.laserpros.com/products-search?qs=';
-    String urlString = url + group.toLowerCase();
+    String urlString = Uri.encodeFull(url + group.toLowerCase());
 
     if (await canLaunch(urlString)) {
       await launch(urlString);

@@ -77,13 +77,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   _launchUrl(String deepLink, String urlString) async {
-    if (deepLink != null && await canLaunch(deepLink)) {
-      print('Launched DeepLink');
-      await launch(deepLink);
+    String link = deepLink != null && await canLaunch(deepLink)
+        ? Uri.encodeFull(deepLink)
+        : Uri.encodeFull(urlString);
+    /*if (deepLink != null && await canLaunch(deepLink)) {
+      link = Uri.encodeFull(deepLink);
     } else {
-      print('Launched urlString');
-      await launch(urlString);
-    }
+      link = Uri.encodeFull(urlString);
+    }*/
+
+    print("Encoded URI: $link");
+    launch(link);
   }
 
   _bottomNavBar() {
@@ -109,7 +113,7 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: GestureDetector(
                 onTap: () async {
-                  await _launchUrl(null, 'tel:7153601703');
+                  await _launchUrl(null, 'tel:7153695995');
                 },
                 child: Container(
                   height: double.infinity,
@@ -124,7 +128,7 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: GestureDetector(
                 onTap: () async {
-                  await _launchUrl(null, 'mailto:techsupp@laserpros.com');
+                  await _launchUrl(null, 'mailto:techsupp@laserpros.com?subject=Tech 2 Go Support Request');
                 },
                 child: Container(
                   height: double.infinity,
@@ -171,7 +175,7 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: GestureDetector(
                 onTap: () async {
-                  await _launchUrl(null, 'https://www.linkedin.com');
+                  await _launchUrl(null, 'https://www.linkedin.com/company/laser-pros-international-corp-/');
                 },
                 child: Container(
                   height: double.infinity,
