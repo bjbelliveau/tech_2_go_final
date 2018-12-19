@@ -2271,14 +2271,6 @@
     ]
   },
   {
-    "ModelName": "Model Link",
-    "Group": "Printer Type",
-    "Type": "Tip",
-    "Extras": [
-      "document-link-(name)"
-    ]
-  },
-  {
     "ModelName": "HP CM1312MFP",
     "Group": "HP Multifunction LaserJet",
     "Type": "Instruction",
