@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.tech2gofinal">
+          package="com.laserpros.tech2gofinal">
 
     <!-- The INTERNET permission is required for development. Specifically,
          flutter needs it to communicate with the running application
