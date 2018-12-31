@@ -3815,7 +3815,7 @@
     ]
   },
   {
-    "ModelName": "HP P2035/2055 Fusing Assembly",
+    "ModelName": "HP P2035/P2055 Fusing Assembly",
     "Group": "RM1-6405",
     "Type": "Fuser",
     "Extras": [
@@ -3847,7 +3847,7 @@
     ]
   },
   {
-    "ModelName": "HP M525/M525CMFP Fusing Assembly",
+    "ModelName": "HP M521MFP/M525MFP/M525CMFP Fusing Assembly",
     "Group": "RM1-8508",
     "Type": "Fuser",
     "Extras": [
@@ -3883,11 +3883,11 @@
     "Group": "B3M77-67902",
     "Type": "Kit",
     "Extras": [
-      "B3M77A"
+      "B3M77A, B3M77-67903"
     ]
   },
   {
-    "ModelName": "HP M806/830MFP Fuser Maintenance Kit",
+    "ModelName": "HP M806/M830MFP Fuser Maintenance Kit",
     "Group": "C2H67-67901",
     "Type": "Kit",
     "Extras": [
@@ -3943,7 +3943,7 @@
     ]
   },
   {
-    "ModelName": "HP P3010/3015 Maintenance Kit New Fuser OEM Rollers",
+    "ModelName": "HP P3010/P3015 Maintenance Kit New Fuser OEM Rollers",
     "Group": "CE525-67901K",
     "Type": "Kit",
     "Extras": [
@@ -3983,7 +3983,7 @@
     ]
   },
   {
-    "ModelName": "HP M604/605/606 Maintenance Kit",
+    "ModelName": "HP M604/M605/M606 Maintenance Kit",
     "Group": "F2G76A",
     "Type": "Kit",
     "Extras": [
@@ -3995,7 +3995,7 @@
     "Group": "H3980-60001K",
     "Type": "Kit",
     "Extras": [
-      ""
+      "RM1-1535, RM1-1491"
     ]
   },
   {
