@@ -15,7 +15,7 @@
          FlutterApplication and put your custom class here. -->
     <application
             android:name="io.flutter.app.FlutterApplication"
-            android:label="tech_2_go_final"
+            android:label="Tech 2 Go"
             android:icon="@mipmap/ic_launcher">
         <meta-data
                 android:name="com.google.android.gms.version"
