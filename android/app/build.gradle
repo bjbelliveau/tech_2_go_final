@@ -45,6 +45,14 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+
+    packagingOptions {
+        exclude 'lib/arm64-v8a/libmodpdfium.so'
+        exclude 'lib/arm64-v8a/libmodft2.so'
+        exclude 'lib/arm64-v8a/libjniPdfium.so'
+        exclude 'lib/arm64-v8a/libmodpng.so'
     }
 
     /*buildTypes {
